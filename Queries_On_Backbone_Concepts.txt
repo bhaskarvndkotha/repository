@@ -1,0 +1,17 @@
+Queries:
+
+1) Backbone-ModelEventChanges.html
+	Why the external function call for bind() event is being called during rendering? why not the inline functions?
+
+2) Backbone-ModelEventChanges2.html
+	After calling listenTo() on the view render function, why the lines after that are not being invoked?
+	passing parameters to the function being called (not the inline function) - why the callback function defined elsewhere is not able to access this.model 	variable?
+	listenTo() function is a member function for View Object?
+3) Backbone-Inheretance.html
+	Can we call the parent models function out side the child model definition?
+	how to handle such overriding functions with parameters?
+4) Backbone-Collections.html
+	_.each() function usage - wont it work on Object of any type?
+	Backbone.js collection is nothing but standard JS Array? looks like push/pop functions are working on the collection object instance.
+5) Backbone-CollectionMethods.html
+	How to remove an element at a specified position from the Collection ?

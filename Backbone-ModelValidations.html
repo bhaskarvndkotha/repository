@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script src ="js/jquery-3.6.0.min.js"></script>
+        <script src ="js/underscore-umd-min.js"></script>
+        <script src ="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script>
+            let MyModel = Backbone.Model.extend({
+                initialize:function(){
+                    console.log("Model Constructor")
+                },
+                validate:function(M){
+                    console.log(M);
+                    console.log("Inside validate function");
+                    console.log(M.Age);
+                    let validationMessage = [];
+                    if(M.Age<18){
+                        validationMessage.push("Age under 18 is invalid");
+                    }
+                    if(!M.Name){
+                        validationMessage.push("Name is required");
+                    }
+                    if(validationMessage.length>0){
+                        return validationMessage.join('\r\n');
+                    }
+                }
+            });
+            let myModel = new MyModel();
+            myModel.set({
+                Name: "Bhaskar Kotha",
+                Company: "CloudTaru Infotech Private Ltd.",
+                Age: 10
+            });
+            
+            let MyView = Backbone.View.extend({
+                el:"#content",
+                model:myModel,
+                initialize:function(){
+                    this.render();
+                },
+                render:function(){
+                    console.log(this.model.isValid());
+                    if(myModel.isValid()){
+                        console.log(this.model.toJSON());
+                        this.$el.html(this.model.get('Age'));
+                    }
+                    else{
+                        console.log(this.model.validationError);
+                        this.$el.html(this.model.validationError);
+                    }
+                    
+                }
+            });
+
+            let myView = new MyView();
+        </script>
+    </body>
+</html>

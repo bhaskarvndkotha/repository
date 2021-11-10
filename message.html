@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script>
+            $(document).ready(function(){
+                let FirstView = Backbone.View.extend({
+                    tagName:"P",
+                    className:"BB",
+                    id:"1234",
+                    initialize:function(){
+                        console.log("Inside Initialize function");
+                        this.$el.html("Hello Backbone");
+                        return this;
+                    },
+                    render:function(element){
+                        console.log("Inside Render function");
+                    }
+                });
+                let fView = new FirstView();
+                $('#content').html(fView.$el);
+            });
+        </script>
+    </body>
+</html>

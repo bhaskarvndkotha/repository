@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <script type="text/template" id="tmpl-model">
+            <H1>This is H1</H1>
+        </script>
+        <div id="content"></div>
+        <script>
+            let MyModel = Backbone.Model.extend({
+                initialize:function(){
+                    console.log("Backbone Model function Entered");
+                }
+            });
+
+            let myModel = new MyModel();
+            myModel.set("name","Backbone Model");
+            myModel.set({
+                Name:"Backbone Model",
+                Author:"CloudTaru",
+                Anchor:"Bhaskar"
+            });
+
+
+            $(document).ready(function(){
+                let ModelView = Backbone.View.extend({
+                    el:"#content",
+                    initialize:function(){
+                        this.render();
+                    },
+                    render:function(){
+                        this.$el.html($("#tmpl-model").html());
+                    }
+                });
+                let modelView = new ModelView();
+            });
+        </script>
+    </body>
+</html>

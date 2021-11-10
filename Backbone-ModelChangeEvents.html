@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script>
+            let MyModel = Backbone.Model.extend({
+                initialize:function(){
+                    console.log("Model Constructor");
+                    this.bind("change",function(model){
+                        console.log("Model data changed");
+                    });
+                    this.bind("change:Company",function(model){
+                        console.log("Company Name changed");
+                    });
+                    this.bind("change:Name",function(model){
+                        console.log("Name Name changed");
+                    });
+                },
+                validate:function(M){}
+            }); 
+            let myModel = new MyModel({
+                Name:"Bhaskar Kotha",
+                Company:"CloudTaru Infotech",
+                Age:39
+            });
+
+            let MyView =Backbone.View.extend({
+                el:"#content",
+                model:myModel,
+                initialize:function(){
+                    this.render();
+                },
+                render:function(){
+                    console.log("My View being rendered here");
+                    this.model.on("change",function(model){
+                        console.log(model.toJSON());
+                        console.log("On Model Change identified by the View render method");
+                    });
+                    this.model.on("change:Company",function(model){
+                        console.log(model.get("Company"));
+                        console.log("On Company Change identified by the view in render method")
+                    });
+                    this.model.on("change:Name",function(model){
+                        console.log(model.get("Name"));
+                        console.log("On Name Change identified by the view in render method")
+                    });
+                    this.model.bind("change:Company",function(model){
+                        console.log(model.get("Company"));
+                        console.log("Company has been changed from bind");
+                    });//inline function style
+                    this.model.bind("change:Company",this.onCompanyChange(this.model));
+                    this.model.bind("change:Name",function(model){
+                        console.log(model.toJSON());
+                        console.log("Name has been changed from bind inline");
+                    });
+                    this.model.bind("change:Name",this.onNameChange(this.model));
+
+                },
+                onNameChange:function(model){
+                    console.log(model.toJSON());
+                    console.log("Name has been changed from bind from function");
+                },
+                onCompanyChange:function(model){
+                    console.log(model.toJSON());
+                    console.log("Comapny has been changed from bind from function");
+                }
+
+            });
+            let myView = new MyView();
+        </script>
+    </body>
+</html>

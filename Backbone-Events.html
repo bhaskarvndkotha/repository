@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <!--Defining Template for the button to be clicked and rendered on the UI-->
+        <script type ="text/html" id="tmpl-eview">
+            <button id="eventBtnClick">Click Me</button>
+            <br/>clck me to trigger the event
+        </script>
+        <!--End of Template definition-->
+        <script>
+            $(document).ready(function(){
+                let EventView = Backbone.View.extend({
+                    el:"#content",
+                    onBtnClick:function(){//define the function onBtnClick which is configured to be called when the button with id:eventBtnClick is clicked
+                        alert("Button Clicked");
+                    },
+                    inlineBtnClick:function(){
+                        let a=10;
+                        let b = 20;
+                        alert("Sum of a, b="+(a+b));
+                    },
+                    events:{//adding the event to bind with the button
+                        "click #eventBtnClick":"onBtnClick",//call the function onBtnClick when the event 'click' is invoked on the button identified by id:evetnBtnClick
+                        //"eventname selector":"callback function"
+                        "mouseover #inlineButton":"inlineBtnClick"
+                    },
+                    initialize:function(){
+                        this.render();
+                    },
+                    render:function(){
+                        tmpl = _.template($("#tmpl-eview").html());
+                        tmpl1 = _.template("<br/><button id='inlineButton'>Inline Button</button>");
+                        this.$el.html(tmpl());
+                        this.$el.append (tmpl1());
+                        console.log("Delegated Events");
+                    }
+
+                });
+                let eventView = new EventView();
+            });
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script>
+            let FModel = Backbone.Model.extend({//parent model
+                initialize:function(){
+                    console.log("Parent INitialized");
+                },
+                playing:function(){
+                    console.log("Parent Playing Method");
+                }
+            });
+            let ChildModel = FModel.extend({
+                playing:function(){
+                    FModel.prototype.playing.apply(this);
+                    console.log("Child Playing Method");
+                },
+                
+                cMethod:function(){
+                    console.log("Child Method executed");
+                }
+            });
+            let cModel = new ChildModel();
+            cModel.playing();
+
+            
+            
+        </script>
+    </body>
+</html>

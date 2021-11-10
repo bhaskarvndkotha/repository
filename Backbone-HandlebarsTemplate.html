@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/handlebars-v4.7.7.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <script type="text/x-handlebars-template" id="tmpl-hbtmpl">
+            {{#each coll}}
+            {{this.Name}} and Team: {{this.Team}}<br/>
+            {{/each}}
+        </script>
+        <div id="content"></div>
+        <script src ="Backbone-HandlebarsTemplate.js"></script>
+    </body>
+</html>

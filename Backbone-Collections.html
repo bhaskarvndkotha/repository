@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <div id="conect"></div>
+        <script>
+            let Player = Backbone.Model.extend({
+                initialize:function(){
+                    console.log("Player Initialized");
+                },
+                defaults:{
+                    Name:"Bhaskar Kotha",
+                    team:"India",
+                    Age:39
+                }
+            });
+
+            let p1 = new Player({
+                Name:"Madhuri Kotha",
+                Age:37
+            });
+            let p2 = new Player({
+                Name:"Bhaskar Kotha",
+                Age:39
+            });
+            let p3 = new Player({
+                Name:"Anvike Kotha",
+                Age:7
+            });
+            let p4 = new Player({
+                Name:"Joshnika Kotha",
+                Age:5
+            });
+            let p5 = new Player({
+                Name:"Santhosh Kotha",
+                Age:13
+            });
+            let Players = Backbone.Collection.extend({
+                model:Player
+            });
+
+            let playersColl = new Players([p1,p2,p3,p4]);
+            playersColl.push(p5);
+            let ProjectView = Backbone.View.extend({
+                collection:playersColl,
+                initialize:function(){
+                    this.render();
+                },
+                render:function(){
+                    console.log(this.collection.toJSON());
+                    _.each(this.collection.toJSON(),function(modelJSON){//underscore.js each loop
+                        console.log(modelJSON);
+                    });
+                    _.each(this.collection.toJSON(),function(i,player){//i is the index, palyer representing each object in the collection.toJSON()
+                        console.log(i);
+                        console.log(player);
+                    });
+                    this.collection.forEach((model)=>{//traditional JS forEach loop
+                        console.log(model.toJSON());
+                    });
+                    console.log("View is rendered");
+                }
+            });
+
+            let pView = new ProjectView();
+
+        </script>
+    </body>
+</html>

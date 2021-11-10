@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <div id="#content"></div>
+        <script>
+            let MyModel = Backbone.Model.extend({
+                initialize:function(){
+                    console.log("Model Constructor");
+                }
+            });
+            var myModel = new MyModel();
+            myModel.set("Name","Bhaskar");
+            myModel.set({
+                "Age":39,
+                "Company":"CloudTaru"
+            });
+
+            let MyView = Backbone.View.extend({
+                el:"#content",
+                model:myModel,
+                initialize:function(){
+                    this.render();
+                },
+                render:function(){
+                    console.log(this.model.toJSON());
+                    console.log(this.model.get("Age"));
+                }
+            });
+            let myView = new MyView();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script src = "js/jquery-3.6.0.min.js"></script>
+        <script src = "js/underscore-umd-min.js"></script>
+        <script src = "js/backbone-min.js"></script>
+    </head>
+    <body>
+        <script type = "text/template" id="tmpl-mview">
+            <H1>My Sample Template in H1</H1>
+            <br/>
+            <H2>My Sample Teamplate in H2</H2>
+        </script>
+        <div id="content"></div>
+        <script>
+            $(document).ready(function(){
+                let MyView = Backbone.View.extend({
+                    el:"#content",
+                    initialize:function(){
+                        this.render();
+                    },
+                    render:function(){
+                        tmpl = _.template($("#tmpl-mview").html());
+                        console.log(tmpl());
+                        this.$el.html(tmpl());
+                        //return this;
+                    }
+                });
+                let myView = new MyView();
+
+            });
+        </script>
+    </body>
+</html>

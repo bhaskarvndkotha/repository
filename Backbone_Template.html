@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/Backbone-min.js"></script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script type = "text/template" id="tmpl-mview">
+            second temlate
+            <br/>
+            Hello Backbone learner
+        </script>
+        <script>
+            $(document).ready(function(){
+                let MyView = Backbone.View.extend({
+                    el:"#content",
+                    className:"MyClass",
+                    //template:_.template("FirstTeamplate"), --1
+                    //template:_.template($("#tmpl-mview").html()),--2
+                    initialize:function(){
+                        this.render();
+                    },
+                    render:function(){
+                        template = _.template($("#tmpl-mview").html());//--3
+                        this.$el.html(template());//--3
+                        //this.$el.html(this.template); --1,2
+                        //console.log("Creating a new template based view");
+                    }
+                });
+                let myView = new MyView();
+                
+            });
+        </script>
+    </body>
+</html>

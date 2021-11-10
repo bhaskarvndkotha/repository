@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <script src ="js/jquery-3.6.0.min.js"></script>
+        <script src ="js/underscore-umd-min.js"></script>
+        <script src ="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <dic id="content"></dic>
+        <script>
+            //$(document).ready(function(){
+                let MyModel = Backbone.Model.extend({
+                    initialize:function(){
+                        console.log("Model Ceated");
+                    }
+                });
+                let myModel = new MyModel({//pass attributes as key value pairs during instantiation
+                    Name:"Bakcbone Models and Views",
+                    Author:"CloudTaru",
+                    Anchor:"Bhaskar"}
+                );
+                //Or  can be done after the instantiation as well
+                /*myModel.set({
+                    Name:"Bakcbone Models and Views",
+                    Author:"CloudTaru",
+                    Anchor:"Bhaskar"
+                });*/
+    
+    
+                let ModelView = Backbone.View.extend({
+                    model:myModel,//one way of passing the model to the View, done during initialization function or constructor function
+                    el:"#content",
+                    initialize:function(){
+                        this.render();
+                    },
+                    render:function(){
+                        console.log("View Rendered");
+                        console.log(this.model.toJSON());
+                        console.log(this.model.get("Name"));
+                    }
+                });
+                //let modelView = new ModelView(); //to support the first way of passing model to the view
+                let modelView = new ModelView({
+                    model:myModel//second means of passing model to the view. pass a parameter to the constructor function
+                });
+            //});
+        </script>
+    </body>
+</html>

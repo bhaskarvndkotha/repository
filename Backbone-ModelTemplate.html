@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/underscore-umd-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+    </head>
+    <body>
+        <div id="content"></div>
+        
+        <script type = "text/template" id="tmpl-datatmpl">
+            <P><%=this.model.get('Name')%> authored Title: <%=this.model.get('Title')%></P>
+            <% if(this.model.get('id') > 5) {%> <!--Used to execute some logic-->
+                <%= this.model.get('Name') %><!--Used to print on the screen-->
+            <% } else { %>
+                <%= this.model.get('Title') %>
+            <% } %>
+            <br/>
+        </script>
+
+        <script>
+            let MyModel = Backbone.Model.extend({
+                initialize:function(){
+
+                }
+            });
+
+            let myModel = new MyModel({
+                Name:"Bhaskar Kotha",
+                Title:"Backbone Models and Templates",
+                id:2
+            });
+
+            let MyView = Backbone.View.extend({
+                el:"#content",
+                events:{
+                    "click Button":"onBtnClick",
+                    "mouseover Button":"onMouseOver"
+                },
+                onBtnClick:function(){
+                    alert("Button Clicked");
+                },
+                onMouseOver:function(){
+                    console.log("Mouse Over the Button");
+                },
+                template:_.template($("#tmpl-datatmpl").html()),
+                model:myModel,
+                initialize:function(){
+                    this.render();
+                },
+                render:function(){
+                    console.log("In render function");
+                    let template = _.template("<Button>Click Me</Button><br/><p><%=Name%> authored Title: <%=Title%></p>");
+                    console.log(this.model.toJSON());
+                    this.$el.html(this.template({
+                        model:this.model.toJSON()
+                    }));
+                    this.$el.append(template(this.model.toJSON()));
+                }
+            });
+            let myView = new MyView();
+        </script>
+    </body>
+</html>
